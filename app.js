@@ -9,7 +9,7 @@ app.use(express.static("public"));
 
 app.get("/", function(req,res){
 	res.sendFile(__dirname + "/signup.html")
-})
+});
 
 app.post("/", function(req,res){
 	const fname = req.body.FName;
@@ -38,7 +38,7 @@ app.post("/", function(req,res){
 		method: "POST",
 		auth: "anupam:765c16664960c762a56eda5c765d1c22-us2"
 	}
-	const request = https.request(url,options, function(response){
+	const request = https.request(url,options, function(request,response){
 		if(response.statusCode === 200){
 			res.sendFile(__dirname + "/success.html");
 		}else{
@@ -50,7 +50,7 @@ app.post("/", function(req,res){
 		})
 	})
 
-	//request.write(jsonData);
+	request.write(jsonData);
 	request.end();
 })
 
@@ -60,9 +60,3 @@ app.post("/failure",function(req,res){
 app.listen(process.env.PORT || 3000,function(){
 	console.log("server is running");
 })
-
-//api key
-//765c16664960c762a56eda5c765d1c22-us2
-
-//unique key
-//6b009493ed
